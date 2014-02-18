@@ -5,6 +5,8 @@
 drop schema if exists nba;
 create schema nba;
 
+alter database nba set search_path to nba; -- WARNING: hardcoded database name!
+
 create table nba.team (
   id        serial primary key,
   name      text unique,
@@ -25,16 +27,16 @@ create table nba.game (
   guest_score int
 );
 
-create view winners as
+create view nba.winners as
   select id,
          date,
          case when host_score > guest_score
               then host
               else guest
           end as winner
-    from game;
+    from nba.game;
 
-create view winlose as
+create view nba.winlose as
    select id, date,
          case when host_score > guest_score
               then host
@@ -52,7 +54,7 @@ create view winlose as
               then guest_score
               else host_score
           end as loser_score
-     from game;
+     from nba.game;
 
 
 create table nba.player_stats (
