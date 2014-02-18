@@ -34,7 +34,7 @@ limit 1"
   (make-team :id    (get-team-id hash-team)
              :score (gethash "score" hash-team)
              :home  (gethash "home" hash-team)
-             :won   (gethash "won" hash-team)))
+             :won   (= 1 (gethash "won" hash-team))))
 
 (defun get-teams (hash-game)
   "Return the host team from the HASH-GAME."
