@@ -79,3 +79,23 @@ select game.date::date,
        join team host on host.id = game.host
        join team guest on guest.id = game.guest
  where trb = min or trb = max;
+
+--
+-- Compute rebounds histogram
+--
+with drb_stats as (
+    select min(drb) as min,
+           max(drb) as max
+      from team_stats
+),
+     histogram as (
+   select width_bucket(drb, min, max, 9) as bucket,
+          int4range(min(drb), max(drb), '[]') as range,
+          count(*) as freq
+     from team_stats, drb_stats
+ group by bucket
+ order by bucket
+)
+ select bucket, range, freq,
+        repeat('*', (freq::float / max(freq) over() * 30)::int) as bar
+   from histogram;
