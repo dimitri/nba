@@ -8,6 +8,7 @@ The idea of this project is to make it possible to load the same data set
 into PostgreSQL so that the same analysis can be done with a powerful SQL
 dialect, for comparison with MongoDB.
 
-See the PostgreSQL article using this project at the following URL:
+See the PostgreSQL articles using this project at the following URLs:
 
   http://tapoueh.org/blog/2014/02/17-aggregating-nba-data-PostgreSQL-vs-MongoDB
+  http://tapoueh.org/blog/2014/02/21-PostgreSQL-histogram
